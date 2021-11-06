@@ -1,5 +1,7 @@
 # PARCHIS
 
+In this blog post you will find a more detailed explanation of what this project is: https://danielpecos.com/2021/11/06/parchis-the-reason-why-i-am-a-developer/
+
 ## WTF is this??
 
 This was my very first program, when I teached my self how to write BASIC code using Microsoft QuickBasic back in 1998.
