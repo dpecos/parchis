@@ -66,11 +66,12 @@ LINE (13, 13)-(441, 441), 15, B
 
 'dibujar titulo
 
-'!! LINEAS TEMPORALES !!! BORRAR
-COLOR 15: LINE (450, 13)-(625, 441), 2, B '!!!!!!!!!!!!
-CALL TABLERO(FICHA(), N, B, DOSFIC(), SEGUROS(), X, Y, NUM) '!!!!!!!!11
-N = 1: LET TURNO = N'!!!!!!!!!!!!
-GOTO TURNO.startB '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Estas instrucciones saltan el proceso de inicializaci¢n de los jugadores
+'Desomentar para saltar proceso durante el arranque
+'COLOR 15: LINE (450, 13)-(625, 441), 2, B 
+'CALL TABLERO(FICHA(), N, B, DOSFIC(), SEGUROS(), X, Y, NUM) 
+'N = 1: LET TURNO = N
+'GOTO TURNO.startB 
 
 'inicializacion de la seleccion de nombres
 
