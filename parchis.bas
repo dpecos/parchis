@@ -17,13 +17,13 @@ DECLARE SUB COLORES (N)
 '*********                 Quick Basic 7.0                 **********
 '********************************************************************
 
+'     1998:
+'       hay que mirar cuando comes cuando sacas
 '
-'     hay que mirar cuando comes cuando sacas
+'       cuando come a veces cuenta dos veces y tb mueve
+'       porque se llama a si mismo en algun sitio
 '
-'     cuando come a veces cuenta dos veces y tb mueve
-'     porque se llama a si mismo en algun sitio
-'
-'
+'     2021/11/06: El programa corre bajo dosbox y QB45 correctamente
 '
 SCREEN 12 'resolucion 640x480
 WINDOW
@@ -232,7 +232,6 @@ IF DADO = 5 THEN
         IF FICHA(N, B) = FICHA(I, O) THEN
           IF N = I THEN LET PUENTE.B = PUENTE.B + 1: GOTO SIG.ficha
           IF N <> I THEN
-            PRINT COMER.B; " "; PUENTE.B: SLEEP
             LET COMER.B = COMER.B + 1
             IF (COMER.B = 2) OR (COMER.B = 1 AND PUENTE.B = 1) THEN
               
@@ -856,7 +855,7 @@ START.loop: DO UNTIL C$ = CHR$(13)
         IF B = 5 THEN LET B = 1
         LET C$ = INKEY$
         IF FICHA(N, B) = 0 THEN LET B = B + 1: GOTO START.loop
-        IF C$ = "P" THEN
+        IF C$ = "P" OR C$ = "p" THEN
 
                 CIRCLE (X, Y), 5, 7: CIRCLE (X, Y), 6, 0: CIRCLE (X, Y), 7, 0
                 FOR A = 1 TO 12
@@ -934,158 +933,85 @@ END SUB
 
 SUB TABLERO (FICHA(), N, B, DOSFIC(), SEGUROS(), X, Y, NUM)
 
-COLOR 15: LOCATE 27, 59: PRINT "Daniel Pecos "
-COLOR 14: LOCATE 27, 73: PRINT "1"
-COLOR 1: LOCATE 27, 74: PRINT "9"
-COLOR 4: LOCATE 27, 75: PRINT "9"
-COLOR 2: LOCATE 27, 76: PRINT "8"
-LINE (450, 13)-(625, 441), 2, B
+  COLOR 15: LOCATE 27, 59: PRINT "Daniel Pecos "
+  COLOR 14: LOCATE 27, 73: PRINT "1"
+  COLOR 1: LOCATE 27, 74: PRINT "9"
+  COLOR 4: LOCATE 27, 75: PRINT "9"
+  COLOR 2: LOCATE 27, 76: PRINT "8"
+  LINE (450, 13)-(625, 441), 2, B
 
-'LINEAS
-'HORIZONT.
-LINE (17, 250.5)-(437, 250.5), 7
-LINE (17, 203.5)-(437, 203.5), 7
-FOR HOR = 17 TO 437 STEP 20
-IF HOR = 157 THEN LET HOR = HOR + 140
-LINE (157, HOR)-(297, HOR), 7
-NEXT HOR
+  'LINEAS
+  'HORIZONT.
+  LINE (17, 250.5)-(437, 250.5), 7
+  LINE (17, 203.5)-(437, 203.5), 7
+  FOR HOR = 17 TO 437 STEP 20
+    IF HOR = 157 THEN LET HOR = HOR + 140
+    LINE (157, HOR)-(297, HOR), 7
+  NEXT HOR
 
-'VERT.
-LINE (203.5, 17)-(203.5, 437), 7
-LINE (250, 17)-(250, 437), 7
-FOR VER = 17 TO 437 STEP 20
-IF VER = 157 THEN LET VER = VER + 140
-LINE (VER, 157)-(VER, 297), 7
-NEXT VER
+  'VERT.
+  LINE (203.5, 17)-(203.5, 437), 7
+  LINE (250, 17)-(250, 437), 7
+  FOR VER = 17 TO 437 STEP 20
+    IF VER = 157 THEN LET VER = VER + 140
+    LINE (VER, 157)-(VER, 297), 7
+  NEXT VER
 
-LINE (17, 17)-(437, 437), 7, B
-LINE (13, 13)-(441, 441), 15, B
-LINE (297, 157)-(157, 297), 7, B
-LINE (17, 17)-(157, 157), 7, B      'rojo
-LINE (437, 437)-(297, 297), 7, B    'amarillo
-LINE (17, 437)-(157, 297), 7, B     'verde
-LINE (437, 17)-(297, 157), 7, B     'azul
-LINE (180, 274)-(274, 180), 8, B    'central
-PAINT (227, 227), 0, 8                'para borrar el cuadro central
-LINE (180, 274)-(274, 180), 7, B
-LINE (157, 157)-(297, 297), 7
-LINE (297, 157)-(157, 297), 7
+  LINE (17, 17)-(437, 437), 7, B
+  LINE (13, 13)-(441, 441), 15, B
+  LINE (297, 157)-(157, 297), 7, B
+  LINE (17, 17)-(157, 157), 7, B      'rojo
+  LINE (437, 437)-(297, 297), 7, B    'amarillo
+  LINE (17, 437)-(157, 297), 7, B     'verde
+  LINE (437, 17)-(297, 157), 7, B     'azul
+  LINE (180, 274)-(274, 180), 8, B    'central
+  PAINT (227, 227), 0, 8                'para borrar el cuadro central
+  LINE (180, 274)-(274, 180), 7, B
+  LINE (157, 157)-(297, 297), 7
+  LINE (297, 157)-(157, 297), 7
 
-PINTAR:
-CIRCLE (87, 87), 45, 7: PAINT (87, 87), 4, 7 'rojo
-CIRCLE (87, 367), 45, 7: PAINT (87, 367), 2, 7'verde
-CIRCLE (367, 87), 45, 7: PAINT (367, 87), 1, 7 'azul
-CIRCLE (367, 367), 45, 7: PAINT (367, 367), 14, 7   'amarillo
-FOR PIN = 47 TO 407 STEP 20: LET COL = 2
-IF PIN > 207 THEN LET COL = 1
-PAINT (PIN, 227), COL, 7
-NEXT PIN
-FOR PIN = 47 TO 407 STEP 20: LET COL = 4
-IF PIN > 207 THEN LET COL = 14
-PAINT (227, PIN), COL, 7
-NEXT PIN
+  PINTAR:
+  CIRCLE (87, 87), 45, 7: PAINT (87, 87), 4, 7 'rojo
+  CIRCLE (87, 367), 45, 7: PAINT (87, 367), 2, 7'verde
+  CIRCLE (367, 87), 45, 7: PAINT (367, 87), 1, 7 'azul
+  CIRCLE (367, 367), 45, 7: PAINT (367, 367), 14, 7   'amarillo
+  FOR PIN = 47 TO 407 STEP 20: LET COL = 2
+    IF PIN > 207 THEN LET COL = 1
+    PAINT (PIN, 227), COL, 7
+  NEXT PIN
+  FOR PIN = 47 TO 407 STEP 20: LET COL = 4
+    IF PIN > 207 THEN LET COL = 14
+    PAINT (227, PIN), COL, 7
+  NEXT PIN
 
 
-'SALIDAS
-PAINT (180, 107), 4, 7
-PAINT (107, 256.5), 2, 7
-PAINT (273, 347), 14, 7
-PAINT (347, 163.5), 1, 7
+  'SALIDAS
+  PAINT (180, 107), 4, 7
+  PAINT (107, 256.5), 2, 7
+  PAINT (273, 347), 14, 7
+  PAINT (347, 163.5), 1, 7
 
-'SEGUROS
-PAINT (27, 227), 8, 7
-PAINT (427, 227), 8, 7
-PAINT (227, 27), 8, 7
-PAINT (227, 427), 8, 7
-PAINT (347, 273.5), 8, 7
-PAINT (273.5, 105), 8, 7
-PAINT (107, 167), 8, 7
-PAINT (167, 350), 8, 7
-'
-'fichas ini
-LET TEM1 = N: LET TEM2 = B
-FOR T = 1 TO 4
-FOR U = 1 TO 4
-LET N = T: LET B = U
-LET NUM = FICHA(N, B): CALL COLOC.FICHAS(FICHA(), DOSFIC(), N, B, SEGUROS(), COLUMNA): CALL CASILLAS(NUM, N, B, DOSFIC(), X, Y)
-IF T = 1 THEN COLO = 14
-IF T = 2 THEN COLO = 1
-IF T = 3 THEN COLO = 4
-IF T = 4 THEN COLO = 2
-CIRCLE (X, Y), 5, 7: PAINT (X, Y), COLO, 7:
-NEXT U: NEXT T
-LET N = TEM1: LET B = TEM2
+  'SEGUROS
+  PAINT (27, 227), 8, 7
+  PAINT (427, 227), 8, 7
+  PAINT (227, 27), 8, 7
+  PAINT (227, 427), 8, 7
+  PAINT (347, 273.5), 8, 7
+  PAINT (273.5, 105), 8, 7
+  PAINT (107, 167), 8, 7
+  PAINT (167, 350), 8, 7
+  
+  'fichas ini
+  LET TEM1 = N: LET TEM2 = B
+  FOR T = 1 TO 4: FOR U = 1 TO 4
+    LET N = T: LET B = U
+    LET NUM = FICHA(N, B): CALL COLOC.FICHAS(FICHA(), DOSFIC(), N, B, SEGUROS(), COLUMNA): CALL CASILLAS(NUM, N, B, DOSFIC(), X, Y)
+    IF T = 1 THEN COLO = 14
+    IF T = 2 THEN COLO = 1
+    IF T = 3 THEN COLO = 4
+    IF T = 4 THEN COLO = 2
+    CIRCLE (X, Y), 5, 7: PAINT (X, Y), COLO, 7:
+  NEXT U: NEXT T
+  LET N = TEM1: LET B = TEM2
 
 END SUB
-
-SUB valores.de.casillas    '!!!!! BORRAR !!!!!
-'                                                IF num = 1 THEN LET X = 267: LET Y = 427: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-''                                                IF num = 2 THEN LET X = 267: LET Y = 407: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 3 THEN LET X = 267: LET Y = 387: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 4 THEN LET X = 267: LET Y = 367: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 5 THEN LET X = 267: LET Y = 347: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 6 THEN LET X = 267: LET Y = 327: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 7 THEN LET X = 267: LET Y = 307: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 8 THEN LET X = 259: LET Y = 287: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 9 THEN LET X = 287: LET Y = 259: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                               IF num = 10 THEN LET X = 307: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                              IF num = 11 THEN LET X = 327: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                             IF num = 12 THEN LET X = 347: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                            IF num = 13 THEN LET X = 367: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                           IF num = 14 THEN LET X = 387: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                          IF num = 15 THEN LET X = 407: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                         IF num = 16 THEN LET X = 427: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                        IF num = 17 THEN LET X = 427: LET Y = 235: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                       IF num = 18 THEN LET X = 427: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                      IF num = 19 THEN LET X = 407: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 20 THEN LET X = 387: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 21 THEN LET X = 367: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 22 THEN LET X = 347: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 23 THEN LET X = 327: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 24 THEN LET X = 307: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 25 THEN LET X = 287: LET Y = 195: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 26 THEN LET X = 259: LET Y = 168: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 27 THEN LET X = 265.5: LET Y = 148: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 28 THEN LET X = 265.5: LET Y = 128: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 29 THEN LET X = 265.5: LET Y = 108: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 30 THEN LET X = 265.5: LET Y = 88: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 31 THEN LET X = 265.5: LET Y = 68: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 32 THEN LET X = 265.5: LET Y = 48: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-''                                                IF num = 33 THEN LET X = 265.5: LET Y = 28: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 34 THEN LET X = 219: LET Y = 28: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
-'                                                IF num = 35 THEN LET X = 188: LET Y = 28: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 36 THEN LET X = 188: LET Y = 48: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 37 THEN LET X = 188: LET Y = 68: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 38 THEN LET X = 188: LET Y = 88: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
- '                                               IF num = 39 THEN LET X = 188: LET Y = 108: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 40 THEN LET X = 188: LET Y = 128: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 41 THEN LET X = 188: LET Y = 148: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 42 THEN LET X = 195: LET Y = 168: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 43 THEN LET X = 168: LET Y = 195: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 44 THEN LET X = 147: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 45 THEN LET X = 127: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 46 THEN LET X = 107: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 47 THEN LET X = 87: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 48 THEN LET X = 67: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 49 THEN LET X = 47: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 50 THEN LET X = 27: LET Y = 188: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 51 THEN LET X = 27: LET Y = 235: IF DOSFIC(N, B) = 1 THEN LET Y = Y - 15.5
-'                                                IF num = 52 THEN LET X = 27: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 53 THEN LET X = 47: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 54 THEN LET X = 67: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 55 THEN LET X = 87: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 56 THEN LET X = 107: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 57 THEN LET X = 127: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 58 THEN LET X = 147: LET Y = 266: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 59 THEN LET X = 168: LET Y = 259: IF DOSFIC(N, B) = 1 THEN LET Y = Y + 15.5
-'                                                IF num = 60 THEN LET X = 195: LET Y = 286: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 61 THEN LET X = 188: LET Y = 307: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 62 THEN LET X = 188: LET Y = 327: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
- '                                               IF num = 63 THEN LET X = 188: LET Y = 347: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 64 THEN LET X = 188: LET Y = 367: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 65 THEN LET X = 188: LET Y = 387: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 66 THEN LET X = 188: LET Y = 407: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'                                                IF num = 67 THEN LET X = 188: LET Y = 427: IF DOSFIC(N, B) = 1 THEN LET X = X - 15.5
-'
-END SUB
-
