@@ -30,7 +30,7 @@ WINDOW
 
 CLS
 
-'תתתתתתתתתת   !!!  DEFINICIאN DE TODAS LAS VARIABLES !!!   תתתתתתתתתת
+'תתתתתתתתתת   !!!  DEFINICION DE TODAS LAS VARIABLES !!!   תתתתתתתתתת
 
 DIM FICHA(4, 4) ' n§ de casilla de cada ficha
 DIM DOSFIC(4, 4) ' dice a que lado debe ir la ficha
@@ -51,7 +51,7 @@ DIM SEGUROS(12): FOR SGUR = 1 TO 12: READ SEGUROS(SGUR): NEXT SGUR   'seguros
  
 
 
-'תתתתתתתתתתתתתתתתת  PRESENTACIאN  תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'תתתתתתתתתתתתתתתתת  PRESENTACION  תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
 
 'dibujar marco del tablero
 
@@ -112,7 +112,7 @@ CALL TABLERO(FICHA(), N, B, DOSFIC(), SEGUROS(), X, Y, NUM)
 
 SELEC.start:
   VIEW SCREEN (451, 14)-(624, 440)
-  COLOR 15: LOCATE 3, 64: PRINT "PARCHײS"
+  COLOR 15: LOCATE 3, 64: PRINT "PARCHIS"
             LOCATE 5, 59: PRINT "Vamos a ver quien "
             LOCATE 6, 59: PRINT "empieza."
 
@@ -198,7 +198,7 @@ LET SEIS = 0: LET B = 0: LET COLUMNA = 7: LET CASILLA.casa = 0
 
 'impresi¢n de la cabecera
 LINE (490, 27)-(571, 51), 2, B
-LOCATE 3, 64: COLOR 15: PRINT "PARCHײS"
+LOCATE 3, 64: COLOR 15: PRINT "PARCHIS"
 LOCATE 5, 63:  PRINT "TURNO N§"; CONTAD + 1
 LOCATE COLUMNA, 59: LET COLUMNA = COLUMNA + 1: CALL COLORES(N): PRINT "Puedes tirar,"
 LOCATE COLUMNA, 59: LET COLUMNA = COLUMNA + 1: PRINT "jugador "; JUGADORE$(N)
@@ -336,7 +336,7 @@ FOR RETARDO = 1 TO 900000: NEXT RETARDO
 
 GOTO TURNO.start
 
-END    '     ­­­­­­­  FIN DE CאDIGO FUENTE  !!!!!!!
+END    '     ­­­­­­­  FIN DE CODIGO FUENTE  !!!!!!!
 'תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
 
 BORRAR:
@@ -499,7 +499,7 @@ END SUB
 
 SUB COLOC.FICHAS (FICHA(), DOSFIC(), N, B, SEGUROS(), COLUMNA)
 
-'!! UNICA Y EXCLUSIVAMENTE CAMBIA LA POSICIאN DE LA FICHA !!
+'!! UNICA Y EXCLUSIVAMENTE CAMBIA LA POSICION DE LA FICHA !!
 
 FOR D = 1 TO 4: FOR G = 1 TO 4
 IF FICHA(N, B) <> 0 THEN
@@ -1017,7 +1017,7 @@ LET N = TEM1: LET B = TEM2
 
 END SUB
 
-SUB valores.de.casillas    ' ¡¡¡¡¡ BORRAR !!!!!
+SUB valores.de.casillas    '!!!!! BORRAR !!!!!
 '                                                IF num = 1 THEN LET X = 267: LET Y = 427: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
 ''                                                IF num = 2 THEN LET X = 267: LET Y = 407: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
 '                                                IF num = 3 THEN LET X = 267: LET Y = 387: IF DOSFIC(N, B) = 1 THEN LET X = X + 15.5
