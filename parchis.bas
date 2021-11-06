@@ -25,14 +25,14 @@ DECLARE SUB COLORES (N)
 '
 '
 '
-SCREEN 12 'resoluci¢n 640x480
+SCREEN 12 'resolucion 640x480
 WINDOW
 
 CLS
 
-'תתתתתתתתתת   !!!  DEFINICION DE TODAS LAS VARIABLES !!!   תתתתתתתתתת
+'----------   !!!  DEFINICION DE TODAS LAS VARIABLES !!!   ----------
 
-DIM FICHA(4, 4) ' n§ de casilla de cada ficha
+DIM FICHA(4, 4) ' num de casilla de cada ficha
 DIM DOSFIC(4, 4) ' dice a que lado debe ir la ficha
 DIM JUGADORE$(4) ' nombre de cada jugador
   FOR N = 1 TO 4: READ JUGADORE$(N): NEXT N
@@ -44,14 +44,14 @@ DIM SEGUROS(12): FOR SGUR = 1 TO 12: READ SEGUROS(SGUR): NEXT SGUR   'seguros
   DATA 5,12,17,22,29,34,39,46,51,56,63,68
 'X  coordenada x de las fichas
 'Y  coordenada y de las fichas
-'NUM  n§ de casilla
+'NUM  num de casilla
 
 
-'תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'--------------------------------------------------------------------
  
 
 
-'תתתתתתתתתתתתתתתתת  PRESENTACION  תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'-----------------  PRESENTACION  -----------------------------------
 
 'dibujar marco del tablero
 
@@ -66,7 +66,7 @@ LINE (13, 13)-(441, 441), 15, B
 
 'dibujar titulo
 
-'Estas instrucciones saltan el proceso de inicializaci¢n de los jugadores
+'Estas instrucciones saltan el proceso de inicializacion de los jugadores
 'Desomentar para saltar proceso durante el arranque
 'COLOR 15: LINE (450, 13)-(625, 441), 2, B 
 'CALL TABLERO(FICHA(), N, B, DOSFIC(), SEGUROS(), X, Y, NUM) 
@@ -76,7 +76,7 @@ LINE (13, 13)-(441, 441), 15, B
 'inicializacion de la seleccion de nombres
 
 COLOR 15
-LOCATE 10, 10: PRINT "¨Desea dar nombres a cada jugador? (S/N)"
+LOCATE 10, 10: PRINT "Desea dar nombres a cada jugador? (S/N)"
 LOCATE 11, 10: INPUT SN$
 IF SN$ = "s" OR SN$ = "S" THEN
         LET R = 12
@@ -101,7 +101,7 @@ IF SN$ = "s" OR SN$ = "S" THEN
 END IF
 FOR RETARDO = 1 TO 50000: NEXT
 
-'תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'--------------------------------------------------------------------
 
 
 
@@ -129,53 +129,53 @@ SELEC.start:
 
   IF A(1) > A(2) AND A(1) > A(3) AND A(1) > A(4) THEN
     COLOR 14
-    LOCATE 17, 59: PRINT "T£ comienzas,"
+    LOCATE 17, 59: PRINT "Tu comienzas,"
     LOCATE 18, 59: PRINT "jugador Amarillo.": LET N = 1: GOTO SELEC.end
     END IF
 
   IF A(2) > A(1) AND A(2) > A(3) AND A(2) > A(4) THEN
     COLOR 1
-    LOCATE 17, 59: PRINT "T£ comienzas,"
+    LOCATE 17, 59: PRINT "Tu comienzas,"
     LOCATE 18, 59: PRINT "jugador Azul.": LET N = 2: GOTO SELEC.end
     END IF
 
   IF A(3) > A(1) AND A(3) > A(2) AND A(3) > A(4) THEN
     COLOR 4
-    LOCATE 17, 59: PRINT "T£ comienzas,"
+    LOCATE 17, 59: PRINT "Tu comienzas,"
     LOCATE 18, 59: PRINT "jugador Rojo.": LET N = 3: GOTO SELEC.end
     END IF
 
   IF A(4) > A(2) AND A(4) > A(3) AND A(4) > A(1) THEN
     COLOR 2
-    LOCATE 17, 59: PRINT "T£ comienzas,"
+    LOCATE 17, 59: PRINT "Tu comienzas,"
     LOCATE 18, 59: PRINT "jugador Verde.": LET N = 4: GOTO SELEC.end
     END IF
 
 
   IF A(1) = A(2) OR A(1) = A(3) OR A(1) = A(4) THEN
     COLOR 15
-    LOCATE 17, 59: PRINT "Hab‚is empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
+    LOCATE 17, 59: PRINT "Habeis empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
     LET RETARDO = 0: FOR RETARDO = 1 TO 500000: NEXT RETARDO
     GOSUB BORRAR: GOTO SELEC.start
     END IF
 
   IF A(2) = A(1) OR A(2) = A(3) OR A(2) = A(4) THEN
     COLOR 15
-    LOCATE 17, 59: PRINT "Hab‚is empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
+    LOCATE 17, 59: PRINT "Habeis empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
     LET RETARDO = 0: FOR RETARDO = 1 TO 500000: NEXT RETARDO
     GOSUB BORRAR: GOTO SELEC.start
     END IF
 
   IF A(3) = A(1) OR A(3) = A(2) OR A(3) = A(1) THEN
     COLOR 15
-    LOCATE 17, 59: PRINT "Hab‚is empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
+    LOCATE 17, 59: PRINT "Habeis empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
     LET RETARDO = 0: FOR RETARDO = 1 TO 500000: NEXT RETARDO
     GOSUB BORRAR: GOTO SELEC.start
     END IF
 
   IF A(4) = A(2) OR A(4) = A(3) OR A(4) = A(4) THEN
     COLOR 15
-    LOCATE 17, 59: PRINT "Hab‚is empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
+    LOCATE 17, 59: PRINT "Habeis empatado.": LOCATE 18, 59: PRINT "Volver a tirar."
     LET RETARDO = 0: FOR RETARDO = 1 TO 500000: NEXT RETARDO
     GOSUB BORRAR: GOTO SELEC.start
     END IF
@@ -186,7 +186,7 @@ FOR RETARDO = 1 TO 80000: NEXT RETARDO
 GOSUB BORRAR: LET TURNO = N: GOTO TURNO.startB
 
 
-'תתתתתתתתתתתתתתתתתתתתתתתתתת  BUCLE PRINCIPAL  תתתתתתתתתתתתתתתתתתתתתתתתתת
+'--------------------------  BUCLE PRINCIPAL  --------------------------
 
 TURNO.start:
 LET N = N + 1: IF N = 5 THEN LET N = 1
@@ -197,10 +197,10 @@ TURNO.startB:
 LET OTRA.fic = 0: LET PUENTE.B = 0: LET COMER = 0
 LET SEIS = 0: LET B = 0: LET COLUMNA = 7: LET CASILLA.casa = 0
 
-'impresi¢n de la cabecera
+'impresion de la cabecera
 LINE (490, 27)-(571, 51), 2, B
 LOCATE 3, 64: COLOR 15: PRINT "PARCHIS"
-LOCATE 5, 63:  PRINT "TURNO N§"; CONTAD + 1
+LOCATE 5, 63:  PRINT "TURNO NUM"; CONTAD + 1
 LOCATE COLUMNA, 59: LET COLUMNA = COLUMNA + 1: CALL COLORES(N): PRINT "Puedes tirar,"
 LOCATE COLUMNA, 59: LET COLUMNA = COLUMNA + 1: PRINT "jugador "; JUGADORE$(N)
 
@@ -271,9 +271,9 @@ SIG.ficha:
       LET CASILLA.casa = 1
       CALL FICHAS(FICHA!(), DOSFIC!(), SEGUROS!(), N!, B!, CASILLA.casa, DADO!, COLUMNA, CASINI!(), NUM)
       
-      IF CONTAD > 0 THEN LOCATE COLUMNA, 59: PRINT "­Has sacado una": LET COLUMNA = COLUMNA + 1
+      IF CONTAD > 0 THEN LOCATE COLUMNA, 59: PRINT "Has sacado una": LET COLUMNA = COLUMNA + 1
       IF CONTAD > 0 THEN LOCATE COLUMNA, 59: PRINT "ficha!": LET COLUMNA = COLUMNA + 1
-      IF CONTAD = 0 AND OTRA.fic <> 1 THEN LOCATE COLUMNA, 59: PRINT "­Has sacado DOS": LET COLUMNA = COLUMNA + 1
+      IF CONTAD = 0 AND OTRA.fic <> 1 THEN LOCATE COLUMNA, 59: PRINT "Has sacado DOS": LET COLUMNA = COLUMNA + 1
       IF CONTAD = 0 AND OTRA.fic <> 1 THEN LOCATE COLUMNA, 59: PRINT "fichas!": LET COLUMNA = COLUMNA + 1
       IF CONTAD = 0 AND OTRA.fic <> 1 THEN LET OTRA.fic = 1 ELSE GOTO TURNO.end
 
@@ -307,7 +307,7 @@ LET Z = 0: FOR Z = 1 TO 4: IF FICHA(N, Z) = 0 THEN GOTO SELEC.ficha
 NEXT Z: IF DADO = 6 THEN LET DADO = 7
 'falta comprobar si puede mover por un puente
 
-SELEC.ficha: LOCATE COLUMNA, 59: PRINT "¨Qu‚ ficha deseas": LET COLUMNA = COLUMNA + 1
+SELEC.ficha: LOCATE COLUMNA, 59: PRINT "Que ficha deseas": LET COLUMNA = COLUMNA + 1
 LOCATE COLUMNA, 59: PRINT "mover? (</>)": LET COLUMNA = COLUMNA + 1
 CALL SELECCION(N, B, FICHA(), NUM, DOSFIC(), SEGUROS(), COLUMNA, X, Y, T1, T2, T3, T4)
 
@@ -322,7 +322,7 @@ CALL FICHAS(FICHA!(), DOSFIC!(), SEGUROS!(), N!, B!, CASILLA.casa, DADO!, COLUMN
 CALL COLORES(N)
 
 SEIS: IF DADO = 6 THEN
-  LOCATE COLUMNA, 59: PRINT "­Vuelves a tirar!": LET COLUMNA = COLUMNA + 1
+  LOCATE COLUMNA, 59: PRINT "Vuelves a tirar!": LET COLUMNA = COLUMNA + 1
   FOR RETARDO = 1 TO 800000: NEXT RETARDO
   GOTO TURNO.startC
   END IF
@@ -337,8 +337,8 @@ FOR RETARDO = 1 TO 900000: NEXT RETARDO
 
 GOTO TURNO.start
 
-END    '     ­­­­­­­  FIN DE CODIGO FUENTE  !!!!!!!
-'תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+END    ' !!!!!! FIN DE CODIGO FUENTE  !!!!!!!
+'----------------------------------------------------------------------
 
 BORRAR:
 FOR BORRADO = 5 TO 24
@@ -526,8 +526,8 @@ SUB CONTAR (COMER, COLUMNA, NUM, FICHA(), N, B, X, Y, DOSFIC(), SEGUROS(), CASIN
 
 IF COMER = 1 THEN
 
-        LOCATE COLUMNA, 59: PRINT "­Te cuentas"; DADO; "!": LET FICHA(D, G) = 0: LET COLUMNA = COLUMNA + 1
-        LOCATE COLUMNA, 59: PRINT "¨Con qu‚ ficha": LET COLUMNA = COLUMNA + 1
+        LOCATE COLUMNA, 59: PRINT "Te cuentas"; DADO; "!": LET FICHA(D, G) = 0: LET COLUMNA = COLUMNA + 1
+        LOCATE COLUMNA, 59: PRINT "Con que ficha": LET COLUMNA = COLUMNA + 1
         LOCATE COLUMNA, 59: PRINT "deseas contar?": LET COLUMNA = COLUMNA + 1
         CALL SELECCION(N, B, FICHA(), NUM, DOSFIC(), SEGUROS(), COLUMNA, X, Y, T1, T2, T3, T4)
         LET FICHA(N, B) = FICHA(N, B) + DADO
@@ -726,7 +726,7 @@ LET FICHA(N, B) = FICHA(N, B) - DADO
   IF FICHA(N, B) < 1 THEN LET FICHA(N, B) = 68 - ABS(FICHA(N, B))
 FOR A = 1 TO 4: FOR C = 1 TO 4
 
-'תתתתתתתתתתתתתתתתתתתתתתתתתת PUENTE תתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'-------------------------- PUENTE -----------------------------
 
   FOR D = 1 TO 4: FOR E = 1 TO 4
 
@@ -785,9 +785,9 @@ FOR A = 1 TO 4: FOR C = 1 TO 4
 
 
 
-'תתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתתת
+'------------------------------------------------------------------
 
-'§§§§§§§§§§§§§§§§§§§§§§§§§§§§§ COMER §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+'***************************** COMER ******************************
 
 'comprobacion para dos fichas en la misma casilla  (COMER)
 
@@ -822,7 +822,7 @@ FICHA(A, C) <> SEGUROS(9) AND FICHA(A, C) <> SEGUROS(10) AND FICHA(A, C) <> SEGU
 
 END IF
 
-'§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+'******************************************************************
 
 NEXT C: NEXT A
 
@@ -835,7 +835,7 @@ SUB SALIR (N, FICHA!())
 VIEW SCREEN (451, 14)-(624, 440)
 LINE (470, 361)-(600, 406), 13, B: PAINT (471, 362), 13
 LINE (475, 366)-(595, 401), 0, B: PAINT (491, 382), 0, 0
-LOCATE 24, 61: COLOR 15: PRINT "¨Deseas salir?"
+LOCATE 24, 61: COLOR 15: PRINT "Deseas salir?"
 LOCATE 25, 61: PRINT "(S/N)"
 LOCATE 25, 68: INPUT SALR$: IF SALR$ = "S" OR SALR$ = "s" THEN END
 FOR BORRADO = 23 TO 26: LOCATE BORRADO, 61: PRINT "                ": NEXT BORRADO: PAINT (471, 362), 0
